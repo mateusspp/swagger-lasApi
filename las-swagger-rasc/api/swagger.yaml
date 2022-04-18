@@ -1,0 +1,306 @@
+---
+swagger: "2.0"
+info:
+  description: "Rascunho de uma API padrão REST/CRUD.\n"
+  version: "1.0.0"
+  title: "CRUD"
+host: "virtserver.swaggerhub.com"
+basePath: "/mateusspp/las-api-swg/1.0.0"
+tags:
+- name: "produtos"
+  description: "Metodos CRUD referentes aos produtos"
+- name: "categorias"
+  description: "Metodos CRUD referentes as categorias"
+- name: "cupons"
+  description: "Metodos CRUD referentes aos cupons"
+schemes:
+- "https"
+- "http"
+paths:
+  /produtos:
+    post:
+      tags:
+      - "produtos"
+      summary: "Adiciona um produto"
+      operationId: "addProd"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Produto que precisa ser adicionado"
+        required: true
+        schema:
+          $ref: "#/definitions/produtos"
+      responses:
+        "405":
+          description: "Entrada invalida"
+      x-swagger-router-controller: "Produtos"
+  /produtos/{nome}:
+    get:
+      tags:
+      - "produtos"
+      summary: "Encontrar um produto"
+      operationId: "encontrarProd"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "nome"
+        in: "path"
+        description: "Produto que precisa ser encontrado"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Entrada invalida"
+      x-swagger-router-controller: "Produtos"
+    put:
+      tags:
+      - "produtos"
+      summary: "Atualização de um produto"
+      operationId: "AttProd"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "nome"
+        in: "path"
+        description: "Produto que precisa ser atualizado"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Entrada invalida"
+      x-swagger-router-controller: "Produtos"
+    delete:
+      tags:
+      - "produtos"
+      summary: "Deleta um produto"
+      operationId: "deleteProd"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "nome"
+        in: "path"
+        description: "Produto que precisa ser deletado"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Entrada invalida"
+      x-swagger-router-controller: "Produtos"
+  /categorias:
+    post:
+      tags:
+      - "categorias"
+      summary: "Adiciona uma categoria"
+      operationId: "addCat"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Adiciona uma categoria"
+        required: true
+        schema:
+          $ref: "#/definitions/categorias"
+      responses:
+        "200":
+          description: "Entrada valida"
+          schema:
+            $ref: "#/definitions/categorias"
+        "400":
+          description: "Entrada invalida"
+      x-swagger-router-controller: "Categorias"
+  /categorias/{nome}:
+    get:
+      tags:
+      - "categorias"
+      summary: "Encontra uma categoria"
+      description: "Operacao que possui a finalidade de encontrar uma categoria"
+      operationId: "getCat"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "nome"
+        in: "path"
+        description: "Categoria que precisa ser encontrada"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Entrada valida"
+      x-swagger-router-controller: "Categorias"
+    put:
+      tags:
+      - "categorias"
+      summary: "Atualize uma categoria"
+      description: "Operacao que possui a finalidade de atualizar uma categoria"
+      operationId: "updateCat"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "nome"
+        in: "path"
+        description: "Categoria que precisa ser atualizado"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Entrada valida"
+          schema:
+            $ref: "#/definitions/categorias"
+        "400":
+          description: "Entrada invalida"
+        "404":
+          description: "Categoria nao encontrada"
+      x-swagger-router-controller: "Categorias"
+    delete:
+      tags:
+      - "categorias"
+      summary: "Delete uma categoria"
+      description: "Operacao que possui a finalidade de deletar uma categoria"
+      operationId: "deleteCat"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "nome"
+        in: "path"
+        description: "Produto que precisa ser deletado"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Entrada invalida"
+        "404":
+          description: "Categoria nao encontrada"
+      x-swagger-router-controller: "Categorias"
+  /cupons:
+    post:
+      tags:
+      - "cupons"
+      summary: "Adiciona um cupom"
+      description: "Operacao que possui a finalidade de encontrar um cupom"
+      operationId: "addCup"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Adicionar um cupom"
+        required: true
+        schema:
+          $ref: "#/definitions/cupons"
+      responses:
+        default:
+          description: "Entrada valida"
+      x-swagger-router-controller: "Cupons"
+  /cupons/{nome}:
+    get:
+      tags:
+      - "cupons"
+      summary: "Pegar os nomes dos cupons"
+      operationId: "getCup"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "nome"
+        in: "path"
+        description: "Produto que precisa ser deletadoo"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Entrada valida"
+          schema:
+            $ref: "#/definitions/cupons"
+        "400":
+          description: "Entrada invalida"
+        "404":
+          description: "Cupom nao encontrado"
+      x-swagger-router-controller: "Cupons"
+    put:
+      tags:
+      - "cupons"
+      summary: "Atualizar um cupom"
+      description: "Operacao que atualiza um cupom"
+      operationId: "updateCup"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "nome"
+        in: "path"
+        description: "Cupom que precisa ser atualizado"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Entrada invalida"
+        "404":
+          description: "Cupom nao encontrado"
+      x-swagger-router-controller: "Cupons"
+    delete:
+      tags:
+      - "cupons"
+      summary: "Delete um cupom"
+      description: "Operacao que possui a finalidade de deletar um cupom"
+      operationId: "deleteCup"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "nome"
+        in: "path"
+        description: "Cupom que precisa ser deletado"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Entrada invalida"
+        "404":
+          description: "Cupom nao encontrado"
+      x-swagger-router-controller: "Cupons"
+definitions:
+  produtos:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      categoria:
+        type: "string"
+        format: "int64"
+      preco:
+        type: "integer"
+      nome:
+        type: "string"
+  categorias:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      nome:
+        type: "string"
+      desconto:
+        type: "integer"
+    example:
+      desconto: 6
+      nome: "nome"
+      id: 0
+  cupons:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      nome:
+        type: "string"
+    example:
+      nome: "nome"
+      id: 0
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
